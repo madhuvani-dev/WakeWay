@@ -1,0 +1,15 @@
+<resources>
+    <style name="Theme.WakeWay" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/primary_navy</item>
+        <item name="android:navigationBarColor">@color/primary_navy</item>
+        <item name="android:windowBackground">@color/surface_light</item>
+    </style>
+
+    <style name="Theme.WakeWay.Alarm" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/alarm_red_dark</item>
+        <item name="android:navigationBarColor">@color/alarm_red_dark</item>
+        <item name="android:windowBackground">@color/alarm_red_dark</item>
+        <item name="android:windowShowWhenLocked">true</item>
+        <item name="android:windowTurnScreenOn">true</item>
+    </style>
+</resources>

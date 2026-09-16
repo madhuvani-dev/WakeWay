@@ -1,0 +1,6 @@
+{
+  "name": "WakeWay",
+  "description": "Smart location-based alarm utility that monitors your journey and wakes you before you reach your destination.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

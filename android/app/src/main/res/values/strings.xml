@@ -31,4 +31,6 @@
     <string name="history_empty_title">Your travel story starts here.</string>
     <string name="history_empty_subtitle">Explore a place and it will appear in your history.</string>
     <string name="explore_places">Explore Places</string>
+    <string name="speed_label">SPEED</string>
+    <string name="speed_unit">km/h</string>
 </resources>

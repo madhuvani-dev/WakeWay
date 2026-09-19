@@ -28,6 +28,7 @@ export interface JourneySession {
   startDistanceMeters: number | null;
   userLat: number | null;
   userLng: number | null;
+  currentSpeedKmh: number | null;
   status: JourneyStatus;
   startedAt: number;
 }

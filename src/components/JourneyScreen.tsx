@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, X, Navigation2, FastForward } from 'lucide-react';
+import { MapPin, X, Navigation2, FastForward, Bell } from 'lucide-react';
 import { Destination } from '../types';
 import { formatDistance } from '../utils/distance';
 
@@ -7,6 +7,7 @@ interface Props {
   destination: Destination;
   alertDistanceMeters: number;
   currentDistanceMeters: number | null;
+  currentSpeedKmh?: number | null;
   onCancelJourney: () => void;
   onSimulateMoveCloser: (stepMeters: number) => void;
   onSimulateJumpToAlert: () => void;
@@ -16,16 +17,22 @@ export const JourneyScreen: React.FC<Props> = ({
   destination,
   alertDistanceMeters,
   currentDistanceMeters,
+  currentSpeedKmh = null,
   onCancelJourney,
   onSimulateMoveCloser,
   onSimulateJumpToAlert
 }) => {
   const [showConfirmCancel, setShowConfirmCancel] = useState(false);
 
+  const speedDisplay =
+    currentSpeedKmh !== null && currentSpeedKmh !== undefined && currentSpeedKmh >= 0
+      ? `${Math.round(currentSpeedKmh)} km/h`
+      : '0 km/h';
+
   return (
     <div className="flex flex-col h-full bg-[#F7F3EA] text-[#173F43] justify-between p-6 select-none">
-      {/* 1. Header: ON THE WAY */}
-      <div className="text-center pt-3 space-y-2">
+      {/* 1. Destination Section */}
+      <div className="text-center pt-2 space-y-1.5">
         <div className="text-[11px] font-bold tracking-[0.25em] text-[#667477] uppercase">
           ON THE WAY
         </div>
@@ -46,53 +53,55 @@ export const JourneyScreen: React.FC<Props> = ({
         )}
       </div>
 
-      {/* 2. Dominant Distance & Subtle Route Visualization */}
+      {/* Central Metric Hierarchy: Remaining Distance -> Route -> Alert Distance */}
       <div className="text-center space-y-6 my-auto">
-        {/* Remaining Distance as Main Information */}
+        {/* 2. Remaining Distance (Main Prominent Information) */}
         <div>
           <div className="text-6xl sm:text-7xl font-extrabold text-[#173F43] tracking-tight tabular-nums font-mono">
             {formatDistance(currentDistanceMeters)}
           </div>
-          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#667477] mt-1.5">
+          <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[#667477] mt-1">
             remaining
           </div>
         </div>
 
-        {/* Subtle Route Visualization */}
-        <div className="py-2 flex items-center justify-center">
-          <div className="flex items-center gap-3 bg-white px-5 py-3 rounded-lg border border-[#E4DCC8] shadow-xs">
-            <div className="flex flex-col items-center">
-              {/* You are here */}
-              <div className="w-2.5 h-2.5 rounded-full bg-[#9EAD9A]" />
-              <div className="w-0.5 h-8 bg-[#9EAD9A]/60 my-0.5" />
-              {/* Destination marker */}
-              <div className="w-3 h-3 rounded-full bg-[#D96C45] border-2 border-white shadow-xs" />
-            </div>
-
-            <div className="flex flex-col justify-between h-12 text-left text-xs">
-              <span className="text-[#667477] font-medium leading-none">You are here</span>
-              <span className="text-[#173F43] font-bold leading-none">
-                Destination (Wake point)
-              </span>
-            </div>
+        {/* Subtle Route Line: You -> Destination */}
+        <div className="py-1 px-8">
+          <div className="flex items-center">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#9EAD9A] shrink-0" />
+            <div className="h-[2px] bg-[#9EAD9A]/60 flex-1 mx-1.5" />
+            <div className="w-3 h-3 rounded-full bg-[#D96C45] border-2 border-white shadow-xs shrink-0" />
+          </div>
+          <div className="flex justify-between text-[11px] font-medium text-[#667477] pt-1">
+            <span>You</span>
+            <span className="font-semibold text-[#173F43]">Destination</span>
           </div>
         </div>
 
-        {/* Calm Metadata: Alert Distance & Monitoring Status */}
-        <div className="flex items-center justify-center gap-4 text-xs font-medium text-[#667477]">
-          <span className="bg-[#FAF7F0] border border-[#E4DCC8] px-2.5 py-1 rounded-md text-[#173F43]">
-            Alert distance: <strong className="text-[#D96C45]">{formatDistance(alertDistanceMeters)}</strong>
+        {/* Real-time Travel Speed */}
+        <div className="flex flex-col items-center py-1">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#667477]">
+            SPEED
           </span>
-          <span className="inline-flex items-center gap-1.5 bg-[#FAF7F0] border border-[#E4DCC8] px-2.5 py-1 rounded-md text-[#173F43]">
-            <span className="w-2 h-2 rounded-full bg-[#9EAD9A] inline-block"></span>
-            Monitoring: Active
+          <span className="text-2xl sm:text-3xl font-bold text-[#173F43] tracking-tight tabular-nums mt-0.5">
+            {speedDisplay}
           </span>
+        </div>
+
+        {/* Alert Distance Threshold */}
+        <div className="flex items-center justify-center pt-2">
+          <div className="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-lg border border-[#E4DCC8] shadow-xs text-xs font-medium text-[#173F43]">
+            <Bell className="w-3.5 h-3.5 text-[#D96C45]" />
+            <span>
+              Wake me at <strong className="text-[#D96C45] font-bold">{formatDistance(alertDistanceMeters)}</strong>
+            </span>
+          </div>
         </div>
       </div>
 
-      {/* 3. Bottom Controls */}
-      <div className="space-y-4 pt-2">
-        {/* Subtle Simulation Helper for Testing & Demos */}
+      {/* Bottom Controls */}
+      <div className="space-y-3 pt-2">
+        {/* Simulation helper for preview testing */}
         <div className="p-2 rounded-lg bg-white/80 border border-[#E4DCC8] space-y-1.5">
           <div className="text-[10px] uppercase font-bold text-[#667477] tracking-wider text-center">
             Journey Simulation
@@ -119,7 +128,7 @@ export const JourneyScreen: React.FC<Props> = ({
           </div>
         </div>
 
-        {/* Primary Action: END JOURNEY */}
+        {/* 5. End Journey Action */}
         <button
           id="btn-cancel-journey"
           onClick={() => setShowConfirmCancel(true)}

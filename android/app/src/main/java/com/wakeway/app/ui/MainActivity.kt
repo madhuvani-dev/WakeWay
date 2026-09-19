@@ -82,6 +82,7 @@ class MainActivity : ComponentActivity() {
                     destination = state.destination,
                     alertDistanceMeters = state.alertDistanceMeters,
                     currentDistanceMeters = state.currentDistanceMeters,
+                    currentSpeedKmh = state.currentSpeedKmh,
                     onCancelJourney = {
                         val intent = Intent(this, LocationMonitoringService::class.java).apply {
                             action = LocationMonitoringService.ACTION_CANCEL

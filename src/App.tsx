@@ -294,7 +294,27 @@ export default function App() {
             journey.destination.longitude
           );
 
-          setJourney((prev) => (prev ? { ...prev, currentDistanceMeters: dist, userLat: lat, userLng: lng } : null));
+          let speedKmh: number | null = null;
+          if (
+            pos.coords.speed !== null &&
+            pos.coords.speed !== undefined &&
+            !isNaN(pos.coords.speed) &&
+            pos.coords.speed >= 0
+          ) {
+            speedKmh = pos.coords.speed * 3.6;
+          }
+
+          setJourney((prev) =>
+            prev
+              ? {
+                  ...prev,
+                  currentDistanceMeters: dist,
+                  userLat: lat,
+                  userLng: lng,
+                  currentSpeedKmh: speedKmh !== null ? speedKmh : prev.currentSpeedKmh
+                }
+              : null
+          );
 
           if (dist <= journey.alertDistanceMeters) {
             triggerAlarm(journey.destination, dist);
@@ -335,6 +355,7 @@ export default function App() {
       startDistanceMeters: initialDist,
       userLat,
       userLng,
+      currentSpeedKmh: null,
       status: 'active',
       startedAt: Date.now()
     };
@@ -551,6 +572,7 @@ export default function App() {
                       destination={journey.destination}
                       alertDistanceMeters={journey.alertDistanceMeters}
                       currentDistanceMeters={journey.currentDistanceMeters}
+                      currentSpeedKmh={journey.currentSpeedKmh}
                       onCancelJourney={handleCancelJourney}
                       onSimulateMoveCloser={handleSimulateMoveCloser}
                       onSimulateJumpToAlert={handleSimulateJumpToAlert}

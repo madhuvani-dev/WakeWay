@@ -168,12 +168,20 @@ class LocationMonitoringService : Service() {
             dest.longitude
         )
 
+        // Real GPS Speed extraction directly from Location object
+        val speedKmh: Float? = if (location.hasSpeed() && location.speed >= 0f) {
+            location.speed * 3.6f
+        } else {
+            null
+        }
+
         // Update state
         if (!isAlarmActive) {
             _journeyState.value = JourneyState.Active(
                 destination = dest,
                 alertDistanceMeters = alertDistanceMeters,
-                currentDistanceMeters = distance
+                currentDistanceMeters = distance,
+                currentSpeedKmh = speedKmh
             )
 
             // Update ongoing notification

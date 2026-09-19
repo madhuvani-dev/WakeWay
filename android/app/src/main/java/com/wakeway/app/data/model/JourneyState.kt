@@ -7,6 +7,7 @@ sealed interface JourneyState {
         val destination: Destination,
         val alertDistanceMeters: Int,
         val currentDistanceMeters: Float? = null,
+        val currentSpeedKmh: Float? = null,
         val lastUpdatedTimestamp: Long = System.currentTimeMillis()
     ) : JourneyState
 

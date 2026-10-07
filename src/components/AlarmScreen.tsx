@@ -5,19 +5,22 @@ import { formatDistance } from '../utils/distance';
 
 interface Props {
   destination: Destination;
-  distanceRemaining: number;
+  distanceRemaining?: number;
+  distanceMeters?: number;
   onDismiss: () => void;
   onSnooze: () => void;
-  isVibrationEnabled: boolean;
+  isVibrationEnabled?: boolean;
 }
 
 export const AlarmScreen: React.FC<Props> = ({
   destination,
   distanceRemaining,
+  distanceMeters,
   onDismiss,
   onSnooze,
-  isVibrationEnabled
+  isVibrationEnabled = true
 }) => {
+  const effectiveDistance = distanceRemaining ?? distanceMeters ?? 0;
   useEffect(() => {
     // Web Vibration API for supported devices
     let vibrateInterval: number | null = null;
@@ -79,7 +82,7 @@ export const AlarmScreen: React.FC<Props> = ({
             Your destination is nearby.
           </p>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-black/15 text-xs font-mono font-bold text-white mt-1">
-            <span>{formatDistance(distanceRemaining)} remaining</span>
+            <span>{formatDistance(effectiveDistance)} remaining</span>
           </div>
         </div>
       </div>

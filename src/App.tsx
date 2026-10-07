@@ -985,8 +985,7 @@ export default function App() {
          * a custom sound has been selected.
          */
         audioEngine.startAlarm(
-          preferences.customAudioBlobUrl,
-          preferences.isVibrationEnabled
+          preferences.customAudioBlobUrl
         );
 
 
@@ -1644,8 +1643,16 @@ export default function App() {
                 journey.destination
               }
 
+              distanceRemaining={
+                journey.currentDistanceMeters ?? 0
+              }
+
               distanceMeters={
-                journey.currentDistanceMeters
+                journey.currentDistanceMeters ?? 0
+              }
+
+              isVibrationEnabled={
+                preferences.isVibrationEnabled
               }
 
               onDismiss={

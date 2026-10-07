@@ -22,6 +22,27 @@
   --color-sage-light: #EBF0EA;
 }
 
+/* Ensure consistent app-wide background and prevent unwanted white/black bounce areas */
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-paper, #F7F3EA);
+  color: var(--color-teal-dark, #173F43);
+  overscroll-behavior: none;
+}
+
+/* Ensure seamless background matching during active alarm state */
+body:has(#btn-dismiss-alarm),
+html:has(#btn-dismiss-alarm),
+#root:has(#btn-dismiss-alarm),
+#root > div:has(#btn-dismiss-alarm) {
+  background-color: var(--color-terracotta, #D96C45);
+}
+
 /* Subtle button feedback */
 .btn-press {
   transition: transform 0.12s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.12s ease;

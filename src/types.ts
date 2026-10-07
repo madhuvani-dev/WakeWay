@@ -24,18 +24,20 @@ export type JourneyStatus =
   | 'active'
   | 'triggered'
   | 'completed'
-  | 'cancelled';
+  | 'cancelled'
+  | 'alarm';
 
 export interface JourneySession {
   destination: Destination;
   alertDistanceMeters: number;
   currentDistanceMeters: number | null;
-  startDistanceMeters: number | null;
-  userLat: number | null;
-  userLng: number | null;
+  startDistanceMeters?: number | null;
+  userLat?: number | null;
+  userLng?: number | null;
   currentSpeedKmh: number | null;
   status: JourneyStatus;
   startedAt: number;
+  lastUpdatedAt?: number;
 }
 
 export interface UserPreferences {

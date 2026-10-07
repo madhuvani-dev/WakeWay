@@ -1,0 +1,27 @@
+<resources>
+    <!-- Deep Navy Palette -->
+    <color name="primary_navy">#0B132B</color>
+    <color name="secondary_navy">#1C2541</color>
+    <color name="tertiary_navy">#3A506B</color>
+
+    <!-- Soft Sky / Teal Accent -->
+    <color name="accent_teal">#00B4D8</color>
+    <color name="accent_teal_light">#48CAE4</color>
+    <color name="accent_teal_container">#E0F7FA</color>
+
+    <!-- Urgency / Alarm -->
+    <color name="alarm_red">#E63946</color>
+    <color name="alarm_red_dark">#D90429</color>
+
+    <!-- Surfaces & Neutrals -->
+    <color name="surface_light">#F8FAFC</color>
+    <color name="surface_card_light">#FFFFFF</color>
+    <color name="text_primary_light">#0F172A</color>
+    <color name="text_secondary_light">#475569</color>
+    <color name="border_light">#E2E8F0</color>
+
+    <color name="surface_dark">#0B132B</color>
+    <color name="surface_card_dark">#1C2541</color>
+    <color name="text_primary_dark">#F8FAFC</color>
+    <color name="text_secondary_dark">#94A3B8</color>
+</resources>

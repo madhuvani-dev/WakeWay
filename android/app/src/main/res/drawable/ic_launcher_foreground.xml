@@ -1,0 +1,43 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:scaleX="0.65"
+        android:scaleY="0.65"
+        android:translateX="18.9"
+        android:translateY="18.9">
+        <!-- Outer Alert Waves -->
+        <path
+            android:strokeColor="#00B4D8"
+            android:strokeWidth="3.5"
+            android:strokeLineCap="round"
+            android:pathData="M24,38 C18,48 18,60 24,70" />
+        <path
+            android:strokeColor="#00B4D8"
+            android:strokeWidth="3.5"
+            android:strokeLineCap="round"
+            android:pathData="M84,38 C90,48 90,60 84,70" />
+        <path
+            android:strokeColor="#48CAE4"
+            android:strokeWidth="3.5"
+            android:strokeLineCap="round"
+            android:pathData="M16,30 C6,45 6,63 16,78" />
+        <path
+            android:strokeColor="#48CAE4"
+            android:strokeWidth="3.5"
+            android:strokeLineCap="round"
+            android:pathData="M92,30 C102,45 102,63 92,78" />
+
+        <!-- Central Pin / Bell / Beacon -->
+        <path
+            android:fillColor="#00B4D8"
+            android:pathData="M54,18 C40.75,18 30,28.75 30,42 C30,59.5 54,86 54,86 C54,86 78,59.5 78,42 C78,28.75 67.25,18 54,18 Z" />
+        
+        <!-- Inner Core Eye / Center Marker -->
+        <path
+            android:fillColor="#0B132B"
+            android:pathData="M54,34 A8,8 0 1 0 54,50 A8,8 0 1 0 54,34 Z" />
+    </group>
+</vector>
